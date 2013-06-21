@@ -5,7 +5,7 @@ module EPochtaService
 		def create_address_book(params)
 			params['action'] = 'addAddressbook'
 			
-			result = exec_command(params, 'addAddressbook')
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'			
@@ -19,7 +19,7 @@ module EPochtaService
 			params = {}
 			params['action'] 	 = 'getUserBalance'
 			params['currency'] = 'RUB'
-			result = exec_command(params, 'getUserBalance')
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'			
@@ -31,7 +31,7 @@ module EPochtaService
 
 		def delete_address_book(params)
 			params['action'] = 'delAddressbook'
-			result = exec_command(params, 'delAddressbook')
+			result = exec_command(params)
 			result = JSON.parse(result.body)		
 			if result.has_key? 'error'			
 				false
@@ -42,7 +42,7 @@ module EPochtaService
 
 		def add_phones(params)
 			params['action'] = 'addPhoneToAddressBook'
-			result = exec_command(params, 'addPhoneToAddressBook')
+			result = exec_command(params)
 			result = JSON.parse(result.body)		
 			if result.has_key? 'error'			
 				false
@@ -53,7 +53,7 @@ module EPochtaService
 
 		def send_sms(params)		
 			params['action'] 	 = 'sendSMS'
-			result = exec_command(params, 'sendSMS')
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'			
@@ -65,7 +65,7 @@ module EPochtaService
 
 		def create_campaign(params)
 			params['action'] 	 = 'createCampaign'
-			result = exec_command(params, 'createCampaign')
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'			

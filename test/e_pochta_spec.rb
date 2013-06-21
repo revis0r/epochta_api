@@ -38,8 +38,8 @@ describe EPochtaSMS do
 		
 		context 'responce value' do
 			before(:each) do
-				@addr_book_request = {'name' => "test adress book #{Random.rand 1000}", 'description' => 'test book'}
-				@request_result = subject.exec_command(@addr_book_request, 'addAddressbook')			
+				@addr_book_request = {'action' => 'addAddressbook', 'name' => "test adress book #{Random.rand 1000}", 'description' => 'test book'}
+				@request_result = subject.exec_command(@addr_book_request)			
 			end
 
 			it 'should have 200 status: OK' do				
@@ -51,8 +51,8 @@ describe EPochtaSMS do
 	describe '.form_request' do
 		context 'return value' do
 			before(:each) do
-				@addr_book_request = {'name' => "test adress book #{Random.rand 1000}", 'description' => 'test book'}
-				@query_string = subject.form_request(@addr_book_request, 'addAddressbook')
+				@addr_book_request = {'action' => 'addAddressbook', 'name' => "test adress book #{Random.rand 1000}", 'description' => 'test book'}
+				@query_string = subject.form_request(@addr_book_request)
 			end
 
 			it 'should be a URI object' do

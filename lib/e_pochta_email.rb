@@ -4,7 +4,7 @@ module EPochtaService
 
 		def create_address_book(params)			
 			params['action'] 	 = 'addAddressbook'				
-			result = exec_command(params, params['action'])
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'							
@@ -16,7 +16,7 @@ module EPochtaService
 
 		def delete_address_book(params)
 			params['action'] 	 = 'delAddressbook'						
-			result = exec_command(params, params['action'])
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'							

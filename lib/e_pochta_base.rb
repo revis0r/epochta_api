@@ -25,18 +25,18 @@ module EPochtaService
 			Digest::MD5.hexdigest( result )
 		end
 
-		def form_request(params, action)
+		def form_request(params)
 			params['version']	= '3.0'
 			params['sum'] = calculate_md5 params
 			self.parameters = params.each {|k,v| v = URI.escape v.to_s }
 			
-			url = URI("#{self.class::URL}#{action}")
+			url = URI("#{self.class::URL}#{params['action']}")
 			url.query = URI.encode_www_form params			
 			url
 		end
 
-		def exec_command(params, action)
-			uri = form_request(params, action)		
+		def exec_command(params)
+			uri = form_request(params)		
 			result = Net::HTTP.post_form(uri, self.parameters)
 		end
 	end		
