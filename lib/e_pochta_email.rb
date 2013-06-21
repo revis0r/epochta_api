@@ -1,9 +1,29 @@
 module EPochtaService
-	class EPochtaSMS < EPochtaBase
-		URL = 'http://atompark.com/api/sms/3.0/'
+	class EPochtaEmail < EPochtaBase
+		URL = 'http://atompark.com/api/email/3.0/'
 
-		def create_address_book(params)
-			
+		def create_address_book(params)			
+			params['action'] 	 = 'addAddressbook'				
+			result = exec_command(params, params['action'])
+			result = JSON.parse(result.body)
+
+			if result.has_key? 'error'							
+				false
+			else
+				result['result']['addressbook_id']
+			end
+		end
+
+		def delete_address_book(params)
+			params['action'] 	 = 'delAddressbook'						
+			result = exec_command(params, params['action'])
+			result = JSON.parse(result.body)
+
+			if result.has_key? 'error'							
+				false
+			else
+				result['result']
+			end
 		end
 
 		def get_balance()
@@ -101,6 +121,25 @@ module EPochtaService
 			end
 			
 		end
-	end
+
+		private
+		# helpers
+		def get_status_text(code)
+			status_text = case code
+				when 0 then 'epochta_pending'
+				when 1 then 'not_enought_money'
+				when 2 then 'in_process'
+				when 3 then 'done'
+				when 4 then 'wrong_numbers'
+				when 5 then 'partialy_done'
+				when 6 then 'spam'
+				when 7 then 'wrong_sender_name'
+				when 8 then 'paused'
+				when 9 then 'planned'
+				when 10 then 'on_moderation'
+			end		
+		end
+
 		
+	end
 end

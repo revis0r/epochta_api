@@ -25,7 +25,8 @@ module EPochtaService
 			Digest::MD5.hexdigest( result )
 		end
 
-		def form_request(params, action)		
+		def form_request(params, action)
+			params['version']	= '3.0'
 			params['sum'] = calculate_md5 params
 			self.parameters = params.each {|k,v| v = URI.escape v.to_s }
 			
