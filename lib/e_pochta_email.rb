@@ -2,6 +2,23 @@ module EPochtaService
 	class EPochtaEmail < EPochtaBase
 		URL = 'http://atompark.com/api/email/3.0/'
 
+		[
+			:addAddressbook, :delAddressbook, :addAddresses,
+			:getAddressbook, :activateEmails
+		].each do |method|
+			define_method(method) do |params|
+				params['action'] = method.to_s	
+				result = exec_command(params)
+				result = JSON.parse(result.body)
+				STDERR.puts result.inspect
+				if result.has_key? 'error'							
+					false
+				else
+					result['result']
+				end
+			end
+		end
+
 		def create_address_book(params)			
 			params['action'] 	 = 'addAddressbook'				
 			result = exec_command(params)

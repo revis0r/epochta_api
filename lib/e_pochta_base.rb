@@ -18,9 +18,29 @@ module EPochtaService
 			params['key'] = self.public_key					
 			#stringify_keys
 			stringified_params = {}
-			params.each {|key, value| stringified_params[key.to_s] = value.to_s}
+			params.each do |key, value|
+				# This is hack for correct md5 summ calculating
+				# when we have array value in param, we must concatenate with 'Array' string
+				# instead of value of this array =\
+				# because of PHP origin of EPochta engine:
+				
+				# this is PHP example of control summ calculating, which is correct
+
+				# ksort($arrayRequest);
+        #    $sum = '';
+        #    foreach ($arrayRequest as $v)
+        #       $sum .= $v; // if $v is Array then it evaluates to 'Array' string value
+
+				if value.is_a?(Array) 
+					stringified_params[key.to_s] = 'Array'
+					next
+				end
+				# =========				
+				stringified_params[key.to_s] = value.to_s
+			end
+			
 			#sort & concatenate all values    
-			stringified_params.sort.each { |value| result = result + value[1] }				
+			stringified_params.sort.each {|value|	result = result + value[1] }
 			result = result + self.private_key
 			Digest::MD5.hexdigest( result )
 		end
@@ -31,7 +51,7 @@ module EPochtaService
 			self.parameters = params.each {|k,v| v = URI.escape v.to_s }
 			
 			url = URI("#{self.class::URL}#{params['action']}")
-			url.query = URI.encode_www_form params			
+			url.query = URI.encode_www_form params
 			url
 		end
 
