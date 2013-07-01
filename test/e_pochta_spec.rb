@@ -1,5 +1,5 @@
 # coding: utf-8
-require './e_pochta.rb'
+require 'e_pochta'
 require 'rspec'
 
 describe EPochtaSMS do	
