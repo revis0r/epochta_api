@@ -51,8 +51,7 @@ module EPochtaService
 			self.parameters = params.each {|k,v| v = URI.escape v.to_s }
 			
 			url = URI("#{self.class::URL}#{params['action']}")
-			url.query = URI.encode_www_form params
-			STDERR.puts url
+			url.query = URI.encode_www_form params			
 			url
 		end
 
