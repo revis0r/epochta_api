@@ -78,7 +78,7 @@ module EPochtaService
 		# params = {'id' => 12345} campaign_id
 		def get_campaign_status(params)
 			params['action'] 	 = 'getCampaignInfo'
-			result = exec_command(params, 'getCampaignInfo')
+			result = exec_command(params)
 			result = JSON.parse(result.body)
 
 			if result.has_key? 'error'			
@@ -93,7 +93,7 @@ module EPochtaService
 		def campaign_delivery_statuses(params)
 			params['action'] 	 = 'getCampaignDeliveryStats'
 					
-			response = exec_command(params, 'getCampaignDeliveryStats')
+			response = exec_command(params)
 			response = JSON.parse(response.body)
 
 			if response.has_key? 'error'			
