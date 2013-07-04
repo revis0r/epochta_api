@@ -74,7 +74,7 @@ describe EPochtaEmail do
 
 		context 'getCampaignStats' do
 			it 'return value should have key "statistics"' do
-				subject.getCampaignStats('id' => 20320).has_key?('statistics').should be true
+				subject.getCampaignStats('id' => 20765).has_key?('statistics').should be true
 			end
 		end
 	end
@@ -82,6 +82,12 @@ describe EPochtaEmail do
 	describe 'getUserBalance method' do
 		it 'should return balance_currency value' do
 			subject.getUserBalance({'currency' => 'RUB'}).has_key?('balance_currency').should	be true
+		end
+	end
+
+	describe 'getCampaignDeliveryStats method' do
+		it 'should return array with statuses for each email' do
+			subject.getCampaignDeliveryStats("id" => 20584).is_a?(Array).should be true
 		end
 	end
 

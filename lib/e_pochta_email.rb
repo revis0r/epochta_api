@@ -5,7 +5,8 @@ module EPochtaService
 		[
 			:addAddressbook, :delAddressbook, :addAddresses,
 			:getAddressbook, :activateEmails, :createCampaign,
-			:delEmail, :getUserBalance, :getCampaignStats
+			:delEmail, :getUserBalance, :getCampaignStats,
+			:getCampaignDeliveryStats
 		].each do |method|
 			define_method(method) do |params|
 				params['action'] = method.to_s	
