@@ -86,8 +86,8 @@ describe EPochtaEmail do
 	end
 
 	describe 'getCampaignDeliveryStats method' do
-		it 'should return array with statuses for each email' do
-			subject.getCampaignDeliveryStats("id" => 20584).is_a?(Array).should be true
+		it 'should return hash with format {"email" => #status_number# } for each email' do
+			subject.getCampaignDeliveryStats("id" => 20792).is_a?(Hash).should be true
 		end
 	end
 
