@@ -11,8 +11,8 @@ describe EPochtaSMS do
 		before do
 			@good_params = {
 				'sender' => 'Dealer',
-				'text'	 => 'Hello Вова!',
-				'phone'	 => '79085085077',
+				'text'	 => 'YOUR TEXT',
+				'phone'	 => '***PHONE NUMBER***',
 				'datetime' => '',
 				'sms_lifetime' => 0
 			}
@@ -35,7 +35,7 @@ describe EPochtaSMS do
 			@address_book_id = subject.create_address_book('name' => "campaign 2 test", 'description' => 'for campaign')
 			subject.add_phones({ 
 					'idAddressBook' => @address_book_id, 
-					'data' => [["79085085077", "Юрий Владимирович"], ['79518408051', 'Вова'] ].to_json 
+					'data' => [["***PHONE NUMBER***", "TEST"] ].to_json 
 				})
 
 			@good_params = {
