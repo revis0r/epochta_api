@@ -15,6 +15,19 @@ module EPochtaService
 			end
 		end
 
+		def check_campaign_price(params)
+			params['action'] = 'checkCampaignPrice'
+			
+			result = exec_command(params)
+			result = JSON.parse(result.body)
+
+			if result.has_key? 'error'			
+				false
+			else
+				result['result']
+			end
+		end
+
 		def get_balance()
 			params = {}
 			params['action'] 	 = 'getUserBalance'
