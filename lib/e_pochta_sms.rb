@@ -1,6 +1,6 @@
 module EPochtaService
 	class EPochtaSMS < EPochtaBase
-		URL = 'http://atompark.com/api/sms/3.0/'
+		URL = 'http://api.atompark.com/sms/3.0/'
 
 		def create_address_book(params)
 			params['action'] = 'addAddressbook'
